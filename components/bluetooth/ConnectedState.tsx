@@ -4,14 +4,15 @@ import { PeripheralServices } from "@/types/bluetooth";
 
 interface ConnectedStateProps {
   bleService: PeripheralServices;
-  onRead: () => void;
+  // onRead: () => void;
   onNotify: () => void;
-  onWrite: () => void;
+  onSpeak: () => void;
+  // onWrite: () => void;
   onDisconnect: (id: string) => void;
   serialOutput: string
 }
 
-const ConnectedState: React.FunctionComponent<ConnectedStateProps> = ({bleService,onDisconnect,onRead,onWrite,onNotify,serialOutput}) => {
+const ConnectedState: React.FunctionComponent<ConnectedStateProps> = ({bleService,onDisconnect,onSpeak,onNotify,serialOutput}) => {
   return (
     <>
       <View style={styles.card}>
@@ -23,10 +24,10 @@ const ConnectedState: React.FunctionComponent<ConnectedStateProps> = ({bleServic
 
       <View style={styles.actionButtons}>
         <TouchableOpacity
-          onPress={onRead}
+          onPress={onSpeak}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>READ</Text>
+          <Text style={styles.buttonText}>SPEAK</Text>
         </TouchableOpacity>
 
         <TouchableOpacity

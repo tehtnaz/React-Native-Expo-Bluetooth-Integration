@@ -12,6 +12,8 @@ import BleManager, {
   BleScanMode,
   Peripheral,
 } from "react-native-ble-manager";
+import * as Speech from 'expo-speech';
+
 
 declare module "react-native-ble-manager" {
   interface Peripheral {
@@ -40,9 +42,7 @@ const BluetoothDemoScreen: React.FC = () => {
   const [bleService, setBleService] = useState<PeripheralServices | undefined>(
     undefined
   );
-  const [serialReceived, setSerialReceived] = useState<string | undefined>(
-    ""
-  );
+  const [serialReceived, setSerialReceived] = useState<string>("");
 
   useEffect(() => {
     BleManager.start({ showAlert: false })
@@ -321,6 +321,10 @@ const BluetoothDemoScreen: React.FC = () => {
       return response;
     }
   };
+  const speak = async () => {
+    const thingToSay = serialReceived;
+    Speech.speak(thingToSay);
+  };
 
   return (
     <View style={styles.container}>
@@ -335,8 +339,7 @@ const BluetoothDemoScreen: React.FC = () => {
       ) : (
         bleService && (
           <ConnectedState
-            onRead={read}
-            onWrite={write}
+            onSpeak={speak}
             onNotify={notify}
             bleService={bleService}
             onDisconnect={disconnectPeripheral}
