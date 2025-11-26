@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
       color: "#333",
     },
     letterDisplay: {
-      fontSize: 36,
+      fontSize: 40,
       color: "#333",
       textAlign: "center",
       fontWeight: "500",
