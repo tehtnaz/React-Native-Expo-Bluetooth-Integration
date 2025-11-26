@@ -9,10 +9,14 @@ interface ConnectedStateProps {
   onSpeak: () => void;
   // onWrite: () => void;
   onDisconnect: (id: string) => void;
-  serialOutput: string
+  serialOutput: string;
+  lettersOutput: string;
 }
 
-const ConnectedState: React.FunctionComponent<ConnectedStateProps> = ({bleService,onDisconnect,onSpeak,onNotify,serialOutput}) => {
+
+
+const ConnectedState: React.FunctionComponent<ConnectedStateProps> = ({bleService,onDisconnect,onSpeak,onNotify,serialOutput, lettersOutput}) => {
+  
   return (
     <>
       <View style={styles.card}>
@@ -43,6 +47,9 @@ const ConnectedState: React.FunctionComponent<ConnectedStateProps> = ({bleServic
         >
           <Text style={styles.buttonText}>DISCONNECT</Text>
         </TouchableOpacity>
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.letterDisplay}>{lettersOutput}</Text>
       </View>
       <View style={styles.card}>
         <Text style={styles.console}>{serialOutput}</Text>
@@ -85,6 +92,12 @@ const styles = StyleSheet.create({
     console: {
       fontSize: 14,
       color: "#333",
+    },
+    letterDisplay: {
+      fontSize: 36,
+      color: "#333",
+      textAlign: "center",
+      fontWeight: "500",
     },
     card: {
       backgroundColor: "#fff",

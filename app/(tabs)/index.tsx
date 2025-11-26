@@ -32,6 +32,96 @@ const RECEIVE_CHARACTERISTIC_UUID = "FFE1";
 
 // let serialReceived = "";
 let serialTemp = "";
+let alreadyCalibrated = false;
+
+function fieldContainsBit(mask: bigint, bit: bigint): boolean{
+  return (mask & bit) != 0n;
+}
+function matchLetterToField(mask: bigint){
+  let letters = "";
+  if(fieldContainsBit(mask, 1n << 0n)){
+    letters += "A ";
+  }
+  if(fieldContainsBit(mask, 1n << 1n)){
+    letters += "B ";
+  }
+  if(fieldContainsBit(mask, 1n << 2n)){
+    letters += "C ";
+  }
+  if(fieldContainsBit(mask, 1n << 3n)){
+    letters += "D ";
+  }
+  if(fieldContainsBit(mask, 1n << 4n)){
+    letters += "E ";
+  }
+  if(fieldContainsBit(mask, 1n << 5n)){
+    letters += "F ";
+  }
+  if(fieldContainsBit(mask, 1n << 6n)){
+    letters += "G ";
+  }
+  if(fieldContainsBit(mask, 1n << 7n)){
+    letters += "H ";
+  }
+  if(fieldContainsBit(mask, 1n << 8n)){
+    letters += "I ";
+  }
+  if(fieldContainsBit(mask, 1n << 9n)){
+    letters += "J ";
+  }
+  if(fieldContainsBit(mask, 1n << 10n)){
+    letters += "K ";
+  }
+  if(fieldContainsBit(mask, 1n << 11n)){
+    letters += "L ";
+  }
+  if(fieldContainsBit(mask, 1n << 12n)){
+    letters += "M ";
+  }
+  if(fieldContainsBit(mask, 1n << 13n)){
+    letters += "N ";
+  }
+  if(fieldContainsBit(mask, 1n << 14n)){
+    letters += "O ";
+  }
+  if(fieldContainsBit(mask, 1n << 15n)){
+    letters += "P ";
+  }
+  if(fieldContainsBit(mask, 1n << 16n)){
+    letters += "Q ";
+  }
+  if(fieldContainsBit(mask, 1n << 17n)){
+    letters += "R ";
+  }
+  if(fieldContainsBit(mask, 1n << 18n)){
+    letters += "S ";
+  }
+  if(fieldContainsBit(mask, 1n << 19n)){
+    letters += "T ";
+  }
+  if(fieldContainsBit(mask, 1n << 20n)){
+    letters += "U ";
+  }
+  if(fieldContainsBit(mask, 1n << 21n)){
+    letters += "V ";
+  }
+  if(fieldContainsBit(mask, 1n << 22n)){
+    letters += "W ";
+  }
+  if(fieldContainsBit(mask, 1n << 23n)){
+    letters += "X ";
+  }
+  if(fieldContainsBit(mask, 1n << 24n)){
+    letters += "Y ";
+  }
+  if(fieldContainsBit(mask, 1n << 25n)){
+    letters += "Z ";
+  }
+  if(letters === ""){
+    letters = "NONE"
+  }
+  return letters;
+}
 
 const BluetoothDemoScreen: React.FC = () => {
   const [isScanning, setIsScanning] = useState(false);
@@ -43,6 +133,7 @@ const BluetoothDemoScreen: React.FC = () => {
     undefined
   );
   const [serialReceived, setSerialReceived] = useState<string>("");
+  const [lettersReceived, setLettersReceived] = useState<string>("");
 
   useEffect(() => {
     BleManager.start({ showAlert: false })
@@ -101,7 +192,21 @@ const BluetoothDemoScreen: React.FC = () => {
     if(serialTemp.indexOf("********************************************") != -1){
       setSerialReceived(serialTemp);
       serialTemp = "";
+      alreadyCalibrated = true;
     }
+    if(serialTemp.indexOf("Calibrating") != -1){
+      alreadyCalibrated = false;
+    }
+    if(alreadyCalibrated === false){
+      setSerialReceived(serialTemp);
+    }
+    // add 5 to make up for mask text
+    let field = serialReceived.slice(serialReceived.indexOf("MASK:") + 5, serialReceived.indexOf("//"));
+    console.debug(field);
+    // console.debug(serialReceived);
+    let bitmask = BigInt(field);
+    console.debug(bitmask);
+    setLettersReceived(matchLetterToField(bitmask).trim());
   };
 
   const handleStopScan = () => {
@@ -322,7 +427,7 @@ const BluetoothDemoScreen: React.FC = () => {
     }
   };
   const speak = async () => {
-    const thingToSay = serialReceived;
+    const thingToSay = lettersReceived;
     Speech.speak(thingToSay);
   };
 
@@ -344,6 +449,7 @@ const BluetoothDemoScreen: React.FC = () => {
             bleService={bleService}
             onDisconnect={disconnectPeripheral}
             serialOutput={serialReceived}
+            lettersOutput={lettersReceived}
           />
         )
       )}
