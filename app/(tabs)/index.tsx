@@ -188,22 +188,33 @@ const BluetoothDemoScreen: React.FC = () => {
       `[handleUpdateValueForCharacteristic] received data from '${data.peripheral}' with characteristic='${data.characteristic}' and value='${data.value}====='`
     );
     let str = new TextDecoder().decode(new Uint8Array(data.value));
+    console.debug(str);
     serialTemp += str;
-    if(serialTemp.indexOf("********************************************") != -1){
+    if(serialTemp.indexOf("*****************************************") !== -1){
       setSerialReceived(serialTemp);
       serialTemp = "";
-      alreadyCalibrated = true;
+      // alreadyCalibrated = true;
     }
-    if(serialTemp.indexOf("Calibrating") != -1){
-      alreadyCalibrated = false;
-    }
-    if(alreadyCalibrated === false){
-      setSerialReceived(serialTemp);
-    }
+    let str2 = serialTemp.slice(serialTemp.indexOf("5:"), serialTemp.indexOf("//"));
+    let another = str2.split("\n");
+    // if(serialTemp.indexOf("Calibrating") != -1){
+    //   alreadyCalibrated = false;
+    // }iuh98lnpkhjkhkjhkjhkjhonopipoijopaiuhiuhiuhiuhiuhkjkjkjkjkjkkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkkkk
+    //hkuhioyhlhkihlikhkihkhkjhkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkkjkjjhkuhuihiugiuiiuyiuyiuyiuyiutiuyiuyiuyyiuyyiu7ttu7ittiu7tkjugskjgkjhhkhjjugjugjjugjgykkkkkkuhiohkihlkhkhjkjhkjhkiyhhkjhgkyhhukjh,mhlklykjhkjhikhkugukgkiugkjugjkgjukjgkjgkjgkjghlhlihlhljkhlkhlkhlkhgjuygkkugjuggjujuggjhgjhgjhgjhgshjgsjhgjhgjhgjhgjhgjhgjhgjhgjiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiuhjjjjjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjnkjhkjhkjhkjhkjhkjhijopijpoijopijopijopijoijpoijjjjjjjjjjjjjjjjjjjjjjjjjjjj
+    // if(alreadyCalibrated === false){
+    //   setSerialReceived(serialTemp);
+    // }
     // add 5 to make up for mask text
     let field = serialReceived.slice(serialReceived.indexOf("MASK:") + 5, serialReceived.indexOf("//"));
-    console.debug(field);
+    // console.debug(serialReceived.slice(serialReceived.indexOf("MASK:"), serialReceived.indexOf("//")));
+    // console.debug(field);
     // console.debug(serialReceived);
+    console.debug(serialTemp);
+    // console.debug("soueiyguhjrliwkuyeh")
+    // console.debug(another);
+    // console.debug(str);sasakjnkjnkjnkjnkjnnnkjhkhkjhkjhkjhkjhkjhkjhkjhkjhkjhkjhkjhkjhkjhkjfgggggsfddfgdfhgdgjfgjfgjfhgsdgsdghhgytgdffddtrtftgggtgtgfgfkjhkjhlkjhkjhkhjlkihhikhjujnkkjjhjhjhjhjhjhjhkjjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgjugjhgjhgjhgjhgjygjhgjhghgjhgjhgjhgjhgjhgjhghjgjhgjhgjhg
+    // console.debug(kkkkkkkkskkjkjhjhkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkffffdttftfdrggrdrdrgdfcdfdfdfggdfyfghfftghfygfjgfghghfghfgfggfhdddgfgrtuyffghgdrydrdfggdfrtyytrrtyhftyrtthrfghhgfghffhfdfdghfggfdssdfsdfkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkknhjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjkjhjkjkjkjkjkjjkkjjkkjkjukjkjkjkjkjjkjhjhjhjhjhjhjhjhjhkjujkukkjukjjkjjhjjjkjkjkkjkjkjkjkjkjkjkjkjukjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjjjkjkhguhhhkkkkkkkkkkkkkkkkkkkkhgyhhhjhjhjhikukghgliuyhvnmhbbv  soiuhkjubkugkuhgkiuhgkiuhgkjhbkjuhgkjugbjkjjkkjkjkjkjkjkjkjkmjmkjkjkjjhjhkhkjkjhmhkhkhkhkkjkjkjkjkjhjjjjjkhhjhhjjhjhjhjhjnmjhnjhjhjjhjhjhjkkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjk,mkjkjkjkjkjkjkjkjkjkjnmjjhkjkjkjkjkjkjkjkijkjjhjhjhjkjhjhhkjkjkjjhkjkjkjkjnmkjkkjkjkjjkjmnm,mmkjkjmjnmjnnmjhnmmjnjhkjjhkjhkjkjkjkjkljkjnkjhkjhkjhkjhkjhkjhkjhkjkjhkjhkjnkjkjkjkjkjkjnkjhnhkjhjhkjhkjkjkjkjkjkjnjkjhkjkjhnkjhkjnnkjkjhkjhjhjhbjhjiokjhkljkjkljkljkljkiljkiljkjhkjhkjnmkjkjhkjuhkjhkjhhkjkjkjhkjhkjhkjhkjhkljkjkjhhkjhkjhkjhkjhkjhkjhkjhkjhgkjhkjhkjhjnmbkjhkjhkljhkjhkjhkhjbmjbmbkjgkjuuhg                                       iohuliu`lh`ohjkluhklhkjhkljhihiuhkjuhjhhhpbhhggggghyhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjjjjjjjjjhjjjjjjkjjjjjjjjjjjhjjjjjjjjjujbjkjkjkjkjkjkjkjkjkjkjkjkjkuhkhkhkuhkuhkuhkuhkuhkuhkuhkuhkuhkuhkuhkuhkuhkuhkuhkuhkuhkuhuhiuhiuhiuhiuhjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjoijoijoijoijjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjklkjllllllkkkkkkkkkaaaasaasassaassaliyygligiuhiuhiuhiouhiuhiuhiouhiuhiuhoiujoijjjjjjjjjjjsjjjjjjjjjjjjjjjjjjjjjjjjjjoijoijoijjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjoijjhiouhouhoiybiuobchjlk;ijhkgchtjymghuykjghghjukioiuouyjhgygui9o8iuygfjhghgjguiygjhhpoiugyuuiyygjhgfyuyuiyiouyguouiyhjgfyuyoiuyguoiygjhgjguituyouiyhjgjuiu98ouiyghfalReceived);
+    if(field === "") return;
     let bitmask = BigInt(field);
     console.debug(bitmask);
     setLettersReceived(matchLetterToField(bitmask).trim());
