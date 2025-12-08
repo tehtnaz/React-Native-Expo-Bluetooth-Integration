@@ -6,7 +6,7 @@ Forked from [cmcWebCode40 React-Native-Expo-Bluetooth-Integration](https://githu
 
 ## What this project adds
 
-- This project specifically integrates with HC-05 bluetooth module.
+- This project specifically integrates with HM-10 bluetooth module.
 - It parses the output from the serial connection and obtains a bitmask.
 - That bitmask is translated into a list of different letters that are potentially being signed with ASL.
 - Those letters are displayed on a card below the connection buttons.

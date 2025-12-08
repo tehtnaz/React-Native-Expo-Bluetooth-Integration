@@ -26,7 +26,7 @@ const SECONDS_TO_SCAN_FOR = 5;
 const SERVICE_UUIDS: string[] = [];
 const ALLOW_DUPLICATES = true;
 
-const DEVICE_SERVICE_UUID = "FFE0";
+const DEVICE_SERVICE_UUID = "FFE0"; // magic numbers i discovered by using my phone to search for devices and characteristics
 const TRANSFER_CHARACTERISTIC_UUID = "FFE1";
 const RECEIVE_CHARACTERISTIC_UUID = "FFE1";
 
