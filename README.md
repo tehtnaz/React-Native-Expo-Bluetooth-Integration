@@ -12,6 +12,11 @@ Forked from [cmcWebCode40 React-Native-Expo-Bluetooth-Integration](https://githu
 - Those letters are displayed on a card below the connection buttons.
 - There is a TTS functionality for reading the letters out loud (unused during the presentation to to unreliable letter data).
 
+The only modified files are:
+- [Index html/tsx, main entry point](app/(tabs)/index.tsx)
+- [ConnectedState view](components/bluetooth/ConnectedState.tsx)
+- and of course the configs
+
 ## Get started
 
 1. Install dependencies
@@ -25,3 +30,5 @@ Forked from [cmcWebCode40 React-Native-Expo-Bluetooth-Integration](https://githu
    ```bash
     npx expo start
    ```
+
+
