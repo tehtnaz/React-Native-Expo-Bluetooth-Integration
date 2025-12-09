@@ -10,7 +10,7 @@ Forked from [cmcWebCode40 React-Native-Expo-Bluetooth-Integration](https://githu
 - It parses the output from the serial connection and obtains a bitmask.
 - That bitmask is translated into a list of different letters that are potentially being signed with ASL.
 - Those letters are displayed on a card below the connection buttons.
-- There is a TTS functionality for reading the letters out loud (unused during the presentation to to unreliable letter data).
+- There is a TTS functionality for reading the letters out loud (unused during the presentation due to time limit).
 
 The only modified files are:
 - [Index html/tsx, functionality of the buttons and reading notification data](app/(tabs)/index.tsx)
