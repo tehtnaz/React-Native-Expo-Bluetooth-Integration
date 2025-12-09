@@ -13,8 +13,8 @@ Forked from [cmcWebCode40 React-Native-Expo-Bluetooth-Integration](https://githu
 - There is a TTS functionality for reading the letters out loud (unused during the presentation to to unreliable letter data).
 
 The only modified files are:
-- [Index html/tsx, main entry point](app/(tabs)/index.tsx)
-- [ConnectedState view](components/bluetooth/ConnectedState.tsx)
+- [Index html/tsx, functionality of the buttons and reading notification data](app/(tabs)/index.tsx)
+- [ConnectedState view, renamed buttons](components/bluetooth/ConnectedState.tsx)
 - and of course the configs
 
 ## Get started
